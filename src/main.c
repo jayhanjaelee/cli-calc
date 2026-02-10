@@ -5,14 +5,32 @@
  */
 
 #include <stdio.h>
-
-#include "parser.h"
-#include "calc.h"
+#include <string.h>
 
 int main(int argc, char *argv[]) {
-    printf("Hello, World!\n");
-    hello_parser();
-    hello_calc();
+    // 커맨드라인 인자가 없으면
+    // usage 보여주기
+    if (argc == 2 && strcmp(argv[1], "--h") == 0)
+    {
+        printf("Usage: calc <nums>\n");
+        printf("Ex: calc 2*2\n");
+    }
+
+    while (1)
+    {
+        char *input = NULL;
+        size_t linecap = 0;
+        ssize_t written_bytes = getline(&input, &linecap, stdin);
+
+        if (written_bytes == -1 || written_bytes == EOF){
+            printf("Quit\n");
+            break;
+        }
+
+        printf("input: %s", input);
+
+    }
+
     return 0;
 }
 
