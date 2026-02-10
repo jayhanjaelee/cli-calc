@@ -9,6 +9,7 @@
 
 #include "parser.h"
 #include "utils.h"
+#include "hj_lib.h"
 
 // ascii 48 ~ 57
 int is_num(char ch)
@@ -48,7 +49,16 @@ void parse_input(char *input, int *lhs, int *rhs, char *op)
     {
         // 각 문자가 숫자인지, 문자인지 체크해서
         // lhs, rhs, op 로 할당.
-        printf("%c isnum:%d\n", input[i], is_num(input[i]));
+        char *tmp_str = NULL;
+
+        if (is_num(input[i]))
+        {
+            // do sth
+        }
+        else if (is_op(input[i]))
+        {
+            // do sth
+        }
 
     }
 }
