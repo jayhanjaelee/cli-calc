@@ -9,6 +9,7 @@
 
 // 내용을 입력하세요
 void hello_parser();
+void parse_input(char *input, int *lhs, int *rhs, char *op);
 
 #endif /* PARSER_H */
 

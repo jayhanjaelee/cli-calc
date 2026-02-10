@@ -7,7 +7,10 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(int argc, char *argv[]) {
+#include "parser.h"
+
+int main(int argc, char *argv[])
+{
     // 커맨드라인 인자가 없으면
     // usage 보여주기
     if (argc == 2 && strcmp(argv[1], "--h") == 0)
@@ -29,6 +32,9 @@ int main(int argc, char *argv[]) {
 
         printf("input: %s", input);
 
+        int lhs, rhs;
+        char op;
+        parse_input(input, &lhs, &rhs, &op);
     }
 
     return 0;
