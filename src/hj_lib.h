@@ -9,6 +9,8 @@
 
 // 내용을 입력하세요
 int hj_atoi(char *);
+int is_num(char ch);
+int is_op(char ch);
 
 #endif /* HJ_LIB_H */
 

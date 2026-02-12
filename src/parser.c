@@ -11,35 +11,9 @@
 #include "utils.h"
 #include "hj_lib.h"
 
-// ascii 48 ~ 57
-int is_num(char ch)
-{
-    return (48 <= ch && ch <=57);
-}
-
-// 사용 가능한 연산자 추출.
 /**
-  + - / *
-*/
-int is_op(char ch)
-{
-    switch (ch)
-    {
-        case '+':
-            return 1;
-        case '-':
-            return 1;
-        case '*':
-            return 1;
-        case '/':
-            return 1;
-        default:
-            break;
-    }
-
-    return 0;
-}
-
+  * input 에서 피연산자, 연산자 추출하는 함수.
+  */
 void parse_input(char *input, int *lhs, int *rhs, char *op)
 {
     trim_newline(input);
@@ -54,12 +28,21 @@ void parse_input(char *input, int *lhs, int *rhs, char *op)
         if (is_num(input[i]))
         {
             // do sth
-        }
-        else if (is_op(input[i]))
+            if (*lhs == 0) {
+                *lhs = hj_atoi(&input[i]);
+            } else if (*rhs == 0) {
+                *rhs = hj_atoi(&input[i]);
+            }
+
+            // 처음 숫자를 찾고서 연산자를 찾을 때 까지 스킵.
+            while (i < input_len - 1 && is_num(input[i + 1])) {
+                i++;
+            }
+        } else if (is_op(input[i]))
         {
             // do sth
+            *op = input[i];
         }
-
     }
 }
 

@@ -8,6 +8,7 @@
 #include <string.h>
 
 #include "parser.h"
+#include "calc.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,11 +31,17 @@ int main(int argc, char *argv[])
             break;
         }
 
-        printf("input: %s", input);
+        // printf("input: %s", input);
 
-        int lhs, rhs;
-        char op;
+        int lhs = 0, rhs = 0;
+        char op = '\0';
         parse_input(input, &lhs, &rhs, &op);
+
+        struct calculator calc = {
+            .lhs = lhs,
+            .rhs = rhs,
+            .op = op,
+        };
     }
 
     return 0;
