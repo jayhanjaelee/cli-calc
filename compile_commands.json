@@ -1,0 +1,14 @@
+[
+  {
+    "file": "test.c",
+    "arguments": [
+      "clang",
+      "-I../src",
+      "-o",
+      "test",
+      "test.c"
+    ],
+    "directory": "/Users/jay/Desktop/cli-calc/tests",
+    "output": "test"
+  }
+]

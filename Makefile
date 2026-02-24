@@ -20,6 +20,8 @@ SRCS = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS = $(OBJS:.o=.d)
 
+TEST_OBJS = $(filter-out ./obj/main.o, $(OBJS))
+
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
@@ -31,6 +33,13 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | $(OBJ_DIR)
 
 $(TARGET) : $(OBJS) | $(BIN_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $@
+
+run:
+	$(TARGET)
+
+test: $(OBJS)
+	$(CC) -o tests/test -Isrc $(TEST_OBJS) tests/test.c
+	tests/test | tests/greenest
 
 .PHONY: clean
 clean:

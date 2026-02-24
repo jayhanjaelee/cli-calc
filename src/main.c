@@ -26,12 +26,12 @@ int main(int argc, char *argv[])
         size_t linecap = 0;
         ssize_t written_bytes = getline(&input, &linecap, stdin);
 
+        printf("input: %s\n", input);
+
         if (written_bytes == -1 || written_bytes == EOF){
             printf("Quit\n");
             break;
         }
-
-        // printf("input: %s", input);
 
         int lhs = 0, rhs = 0;
         char op = '\0';
