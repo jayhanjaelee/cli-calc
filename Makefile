@@ -1,48 +1,54 @@
 # Makefile
 CC = clang
 
+INCLUDE_DIR = include
 ifeq ($(DEBUG), 1)
-    CFLAGS = -Wall -std=c99 -Wextra -g -O0
+    CFLAGS = -Wall -std=c99 -I$(INCLUDE_DIR) -Wextra -g -O0
 else
-    CFLAGS = -Wall -std=c99 -Wextra -O2
+    CFLAGS = -Wall -std=c99 -I$(INCLUDE_DIR) -Wextra -O2
 endif
 
-INCLUDE = -I./src
+TARGET = calc
 
-SRC_DIR = ./src
-OBJ_DIR = ./obj
-BIN_DIR = ./bin
-
-TARGET = $(BIN_DIR)/calc
-all: $(TARGET)
+SRC_DIR = src
+BUILD_DIR = build
+OBJ_DIR = $(BUILD_DIR)/objs
 
 SRCS = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS = $(OBJS:.o=.d)
 
-TEST_OBJS = $(filter-out ./obj/main.o, $(OBJS))
+TEST_DIR = tests
+TEST_TARGET = test
+TEST_SRCS = $(wildcard $(TEST_DIR)/*.c)
+TEST_OBJS = $(filter-out $(OBJ_DIR)/main.o, $(OBJS))
+
+all: $(TARGET)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(BIN_DIR):
-	mkdir -p $(BIN_DIR)
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/$(TEST_DIR)
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ -MD
 
-$(TARGET) : $(OBJS) | $(BIN_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $@
+$(TARGET): $(OBJS) | $(BUILD_DIR)
+	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $(BUILD_DIR)/$@
 
 run:
-	$(TARGET)
+	$(BUILD_DIR)/$(TARGET)
 
 test: $(OBJS)
-	$(CC) -o tests/test -Isrc $(TEST_OBJS) tests/test.c
-	tests/test | tests/greenest
+	mkdir -p $(BUILD_DIR)/$(TEST_DIR)
+	$(CC) -o $(BUILD_DIR)/$(TEST_DIR)/$(TEST_TARGET) -I$(INCLUDE_DIR)  $(TEST_OBJS) $(TEST_DIR)/test.c
+	$(BUILD_DIR)/$(TEST_DIR)/test | tests/greenest
 
 .PHONY: clean
+
 clean:
-	rm -rf $(OBJ_DIR) $(BIN_DIR)
+	rm -rf $(BUILD_DIR)
 
 -include $(DEPS)

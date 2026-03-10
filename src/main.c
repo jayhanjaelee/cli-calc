@@ -7,21 +7,18 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "parser.h"
 #include "calc.h"
 
 int main(int argc, char *argv[])
 {
     // 커맨드라인 인자가 없으면
     // usage 보여주기
-    if (argc == 2 && strcmp(argv[1], "--h") == 0)
-    {
+    if (argc == 2 && strcmp(argv[1], "--h") == 0) {
         printf("Usage: calc <nums>\n");
         printf("Ex: calc 2*2\n");
     }
 
-    while (1)
-    {
+    while (1) {
         char *input = NULL;
         size_t linecap = 0;
         ssize_t written_bytes = getline(&input, &linecap, stdin);
@@ -35,7 +32,6 @@ int main(int argc, char *argv[])
 
         int lhs = 0, rhs = 0;
         char op = '\0';
-        parse_input(input, &lhs, &rhs, &op);
 
         struct calculator calc = {
             .lhs = lhs,

@@ -1,14 +1,74 @@
 [
   {
-    "file": "test.c",
+    "file": "src/calc.c",
     "arguments": [
       "clang",
-      "-I../src",
+      "-Wall",
+      "-std=c99",
+      "-Iinclude",
+      "-Wextra",
+      "-O2",
+      "-c",
+      "src/calc.c",
       "-o",
-      "test",
-      "test.c"
+      "build/objs/calc.o",
+      "-MD"
     ],
-    "directory": "/Users/jay/Desktop/cli-calc/tests",
-    "output": "test"
+    "directory": "/Users/jay/Desktop/cli-calc",
+    "output": "build/objs/calc.o"
+  },
+  {
+    "file": "src/hj_lib.c",
+    "arguments": [
+      "clang",
+      "-Wall",
+      "-std=c99",
+      "-Iinclude",
+      "-Wextra",
+      "-O2",
+      "-c",
+      "src/hj_lib.c",
+      "-o",
+      "build/objs/hj_lib.o",
+      "-MD"
+    ],
+    "directory": "/Users/jay/Desktop/cli-calc",
+    "output": "build/objs/hj_lib.o"
+  },
+  {
+    "file": "src/main.c",
+    "arguments": [
+      "clang",
+      "-Wall",
+      "-std=c99",
+      "-Iinclude",
+      "-Wextra",
+      "-O2",
+      "-c",
+      "src/main.c",
+      "-o",
+      "build/objs/main.o",
+      "-MD"
+    ],
+    "directory": "/Users/jay/Desktop/cli-calc",
+    "output": "build/objs/main.o"
+  },
+  {
+    "file": "src/utils.c",
+    "arguments": [
+      "clang",
+      "-Wall",
+      "-std=c99",
+      "-Iinclude",
+      "-Wextra",
+      "-O2",
+      "-c",
+      "src/utils.c",
+      "-o",
+      "build/objs/utils.o",
+      "-MD"
+    ],
+    "directory": "/Users/jay/Desktop/cli-calc",
+    "output": "build/objs/utils.o"
   }
 ]

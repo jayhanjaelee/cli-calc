@@ -7,7 +7,8 @@
 #ifndef CALC_H
 #define CALC_H
 
-// 내용을 입력하세요 struct calculator {
+// 내용을 입력하세요 
+struct calculator {
     int lhs;
     int rhs;
     char op;
